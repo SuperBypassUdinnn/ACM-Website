@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+requests
+chromadb
+asyncpg
+python-multipart
+passlib[bcrypt]
+python-jose[cryptography]
+python-dotenv

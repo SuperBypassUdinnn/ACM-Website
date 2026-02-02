@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/lib/auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Customer Service | ChatBot SaaS",
+  title: "Layanan Pelanggan AI | ChatBot SaaS",
   description:
-    "Transform your customer service with AI-powered chatbots that work 24/7, respond instantly, and integrate seamlessly.",
+    "Transformasikan layanan pelanggan Anda dengan chatbot berbasis AI yang bekerja 24/7, merespons dengan cepat, dan terintegrasi dengan mulus.",
 };
 
 export default function RootLayout({
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

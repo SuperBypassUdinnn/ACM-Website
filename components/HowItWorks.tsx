@@ -7,21 +7,21 @@ interface Step {
 const steps: Step[] = [
   {
     number: "01",
-    title: "Integrate",
+    title: "Integrasi",
     description:
-      "Connect our API to your platform with just a few lines of code. Works with any tech stack.",
+      "Hubungkan API kami ke platform Anda hanya dengan beberapa baris kode. Bekerja dengan teknologi apa pun.",
   },
   {
     number: "02",
-    title: "Customize",
+    title: "Kustomisasi",
     description:
-      "Train the AI with your business knowledge, FAQs, and product information for accurate responses.",
+      "Latih AI dengan pengetahuan bisnis, FAQ, dan informasi produk Anda untuk respons yang akurat.",
   },
   {
     number: "03",
-    title: "Launch",
+    title: "Peluncuran",
     description:
-      "Go live instantly and start serving customers with intelligent, automated support.",
+      "Langsung online dan mulai melayani pelanggan dengan dukungan otomatis yang cerdas.",
   },
 ];
 
@@ -30,10 +30,10 @@ export default function HowItWorks() {
     <section className="py-20 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-black mb-4">
-          How It Works
+          Cara Kerjanya
         </h2>
         <p className="text-xl text-gray-600 text-center mb-16 max-w-2xl mx-auto">
-          Get started in three simple steps
+          Mulai dalam tiga langkah sederhana
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">

@@ -6,27 +6,27 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    title: "24/7 Availability",
+    title: "Tersedia 24/7",
     description:
-      "AI-powered support that works around the clock, ensuring your customers always get help when they need it.",
+      "Dukungan berbasis AI yang bekerja sepanjang waktu, memastikan pelanggan Anda selalu mendapat bantuan saat mereka membutuhkannya.",
     icon: "🌐",
   },
   {
-    title: "Lightning Fast",
+    title: "Sangat Cepat",
     description:
-      "Instant responses to customer queries with no wait times, improving satisfaction and retention.",
+      "Respons instan terhadap pertanyaan pelanggan tanpa waktu tunggu, meningkatkan kepuasan dan retensi.",
     icon: "⚡",
   },
   {
-    title: "Easy Integration",
+    title: "Integrasi Mudah",
     description:
-      "Simple setup with your existing systems. Get up and running with minimal technical overhead.",
+      "Pengaturan sederhana dengan sistem yang sudah ada. Siap digunakan dengan overhead teknis minimal.",
     icon: "🔌",
   },
   {
-    title: "High Accuracy",
+    title: "Akurasi Tinggi",
     description:
-      "Advanced NLP technology ensures precise understanding and relevant responses to complex queries.",
+      "Teknologi NLP canggih memastikan pemahaman yang tepat dan respons yang relevan terhadap pertanyaan kompleks.",
     icon: "🎯",
   },
 ];
@@ -36,10 +36,11 @@ export default function Features() {
     <section className="py-20 px-4 bg-black text-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-          Why Choose Our AI Chatbot?
+          Mengapa Memilih Chatbot AI Kami?
         </h2>
         <p className="text-xl text-gray-400 text-center mb-16 max-w-2xl mx-auto">
-          Powerful features designed to elevate your customer service experience
+          Fitur-fitur canggih yang dirancang untuk meningkatkan pengalaman
+          layanan pelanggan Anda
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
