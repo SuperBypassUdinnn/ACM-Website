@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import Link from "next/link";
+import OAuthButton from "@/components/OAuthButton";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -43,6 +44,23 @@ export default function LoginPage() {
                 {error}
               </div>
             )}
+            
+            {/* OAuth Buttons */}
+            <div className="space-y-3">
+              <OAuthButton provider="google" />
+              <OAuthButton provider="microsoft" />
+              <OAuthButton provider="github" />
+            </div>
+
+            {/* Divider */}
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-zinc-700" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-zinc-900 text-gray-400">Atau lanjutkan dengan email</span>
+              </div>
+            </div>
 
             {/* Email */}
             <div>

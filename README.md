@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ACM AI Chatbot - SaaS Platform
 
-## Getting Started
+Multi-tenant AI chatbot SaaS platform dengan PostgreSQL database dan ChromaDB vector store.
 
-First, run the development server:
+## Tech Stack
+
+**Backend:**
+
+- FastAPI (Python)
+- PostgreSQL (Database)
+- ChromaDB (Vector Store)
+- Ollama (LLM & Embeddings)
+- asyncpg, bcrypt, JWT
+
+**Frontend:**
+
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+- React
+
+## Setup
+
+### 1. Backend Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate.fish  # or activate.bat on Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Setup database (PostgreSQL required)
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Seed initial data
+python scripts/seed_db.py
+
+# Start backend
+uvicorn app:app --reload
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Frontend Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Install dependencies
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Start dev server
+npm run dev
+```
 
-## Learn More
+### 3. Ollama Setup
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Pull required models
+ollama pull llama3.2:3b
+ollama pull nomic-embed-text
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+acm-web/
+├── app/                    # Next.js pages & routes
+├── components/             # React components
+├── lib/                    # Client utilities (auth, etc)
+├── scripts/                # Python utility scripts
+│   ├── seed_db.py         # Database seeding
+│   ├── upload_documents.py # CSV → PostgreSQL
+│   ├── ingest.py          # Generate embeddings
+│   ├── get_client_id.py   # List clients
+│   └── clear_db.py        # Clear database
+├── data/                   # Client documents (CSV)
+├── vectordb/               # ChromaDB storage
+├── app.py                  # FastAPI backend
+└── requirements.txt        # Python dependencies
+```
 
-## Deploy on Vercel
+## Workflows
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Register New User
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Visit `http://localhost:3000/register`
+2. Choose plan (Free/Basic/Pro)
+3. Auto-create client + API key
+
+### Upload Documents
+
+```bash
+# 1. Create folder: data/<Client Name>/
+# 2. Add CSV files (title,content,category)
+python scripts/upload_documents.py "<Client Name>"
+
+# 3. Generate embeddings
+python scripts/ingest.py
+```
+
+### Test Chat API
+
+```bash
+curl -X POST http://localhost:8000/chat \
+  -H "x-api-key: <your-key>" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello", "session_id": "test"}'
+```
+
+## Features
+
+- ✅ Multi-tenant data isolation
+- ✅ JWT authentication
+- ✅ Auto client provisioning
+- ✅ Client-specific vector collections
+- ✅ CSV document upload
+- ✅ RAG-based context retrieval
+- ✅ Session management
+- ✅ Usage tracking
+
+## API Endpoints
+
+**Auth:**
+
+- `POST /auth/register` - Register + auto-provision
+- `POST /auth/login` - Login with JWT
+- `GET /auth/me` - Get current user
+
+**Chat:**
+
+- `POST /chat` - Send message (requires API key)
+
+**Health:**
+
+- `GET /health` - Health check
+- `GET /` - API info
+
+## Environment Variables
+
+```env
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_NAME=acm_ai
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+
+JWT_SECRET=your-secret-key
+JWT_ALGORITHM=HS256
+
+OLLAMA_BASE_URL=http://localhost:11434
+```
+
+## License
+
+MIT
